@@ -11,9 +11,9 @@ async function bootstrap() {
   const config = app.get(ConfigService);
   const documentConfig = new DocumentBuilder()
     .setTitle('Social Feed')
-    .setDescription('The con cruise API description')
+    .setDescription('The social feed API description')
     .setVersion('1.0')
-    .addServer(config.get('app.SERVER'))
+    .addServer(config.get('APP.SERVER'))
     .addTag('social-feed')
     .build();
   const document = SwaggerModule.createDocument(app, documentConfig);
