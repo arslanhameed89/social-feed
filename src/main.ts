@@ -6,6 +6,7 @@ import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  app.setGlobalPrefix('api/v1')
 
   const config = app.get(ConfigService);
   const documentConfig = new DocumentBuilder()
@@ -20,6 +21,6 @@ async function bootstrap() {
 
   app.useGlobalPipes(new ValidationPipe({ transform: true }));
 
-  await app.listen(config.get('app.PORT'), config.get('app.HOST'));
+  await app.listen(config.get('APP.PORT'), config.get('APP.HOST'));
 }
 bootstrap();
