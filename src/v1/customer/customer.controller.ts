@@ -17,8 +17,12 @@ import { randomUUID } from "crypto";
 export class CustomerController {
   constructor(private customerService: CustomerService) {}
 
+  /**
+   * @param createCustomerDto
+   * @param file
+   */
   @Post()
-  @ApiFile('file', true, UploadRequestBody, {
+  @ApiFile('profilePic', true, UploadRequestBody, {
     storage: diskStorage({
       destination: './uploads-tmp',
       filename: (req: Request, file: IFile, callback: (error: Error | null, filename: string) => void) => {
@@ -28,9 +32,7 @@ export class CustomerController {
     fileFilter: fileMimetypeFilter('image')
   })
   create(@Body() createCustomerDto: CreateCustomerDto, @UploadedFile() file: Express.Multer.File): Promise<Customer> {
-
-    console.log(createCustomerDto, file)
-    return this.customerService.create(createCustomerDto);
+    return this.customerService.create(createCustomerDto, file);
   }
 
   @Patch(':id')
