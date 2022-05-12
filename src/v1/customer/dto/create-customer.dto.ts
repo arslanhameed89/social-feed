@@ -1,12 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty } from "class-validator";
+import { coordinates } from '@/v1/customer/schemas/customer.schema';
 
-class coordinates {
-  @ApiProperty()
-  longitude: number;
-  @ApiProperty()
-  latitude: number;
-}
 
 export class CreateCustomerDto {
 

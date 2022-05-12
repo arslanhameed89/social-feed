@@ -1,5 +1,13 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
+import { ApiProperty } from "@nestjs/swagger";
+
+export class coordinates {
+  @ApiProperty()
+  longitude: number;
+  @ApiProperty()
+  latitude: number;
+}
 
 @Schema({ autoCreate: true, timestamps: true })
 export class Customer extends Document {
@@ -25,11 +33,11 @@ export class Customer extends Document {
   @Prop()
   mobileVerified: boolean;
 
-  @Prop()
-  coordinates: any;
+  @Prop({ type: coordinates })
+  coordinates: coordinates;
 
   @Prop()
-  ip: any;
+  ip: string;
 
   @Prop()
   loginType: number;
