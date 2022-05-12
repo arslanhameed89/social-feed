@@ -3,13 +3,16 @@ import { CustomerRepository } from '../repository/customer.repository';
 import { CreateCustomerDto } from '../dto/create-customer.dto';
 import { UpdateCustomerDto } from '../dto/update-customer.dto';
 import { Customer } from '../schemas/customer.schema';
+import { IUploadedFileFile } from "@/core/interfaces/IUploadedFile";
 
 @Injectable()
 export class CustomerService {
   constructor(private customerRepository: CustomerRepository) {}
 
-  async create(createCustomerDto: CreateCustomerDto): Promise<Customer> {
+  async create(createCustomerDto: CreateCustomerDto, file: IUploadedFileFile): Promise<Customer> {
     try {
+      console.log(createCustomerDto, file, 'androoo')
+
       return await this.customerRepository.create(<Customer>createCustomerDto);
     } catch (e) {
       console.error(e);
