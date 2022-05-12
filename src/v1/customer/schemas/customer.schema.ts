@@ -28,7 +28,7 @@ export class Customer extends Document {
   emailVerified: string;
 
   @Prop()
-  mobile: string;
+  mobile: number;
 
   @Prop()
   mobileVerified: boolean;
