@@ -5,22 +5,22 @@ import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
 import { Post as PostSchema } from './schemas/post.schema';
 
-@Controller('customer')
-@ApiTags('customer')
+@Controller('post')
+@ApiTags('post')
 export class PostController {
   constructor(private customerService: PostService) {}
 
   @Post()
-  create(@Body() createCustomerDto: CreatePostDto): Promise<PostSchema> {
-    return this.customerService.create(createCustomerDto);
+  create(@Body() createPostDto: CreatePostDto): Promise<PostSchema> {
+    return this.customerService.create(createPostDto);
   }
 
   @Patch(':id')
   update(
     @Param('id') id: string,
-    @Body() updateCustomerDto: UpdatePostDto,
+    @Body() updatePostDto: UpdatePostDto,
   ): Promise<PostSchema> {
-    return this.customerService.update(id, updateCustomerDto);
+    return this.customerService.update(id, updatePostDto);
   }
 
 }
