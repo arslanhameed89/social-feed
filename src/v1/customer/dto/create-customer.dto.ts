@@ -1,24 +1,27 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty } from "class-validator";
+import { IsEmail, IsNotEmpty, IsNumber, IsString } from "class-validator";
 import { coordinates } from '@/v1/customer/schemas/customer.schema';
-
 
 export class CreateCustomerDto {
 
   @ApiProperty()
   @IsNotEmpty()
+  @IsString()
   name: string;
 
   @ApiProperty()
   @IsNotEmpty()
+  @IsString()
   password: string;
 
   @ApiProperty()
   @IsNotEmpty()
-  mobile: string;
+  @IsNumber()
+  mobile: number;
 
   @ApiProperty()
   @IsNotEmpty()
+  @IsEmail()
   email: string;
 
   @ApiProperty()
@@ -28,15 +31,19 @@ export class CreateCustomerDto {
   coordinates: coordinates;
 
   @ApiProperty()
+  @IsNotEmpty()
+  @IsString()
   dateOfBirth: string;
 
   @ApiProperty()
   profilePic: string;
 
-  @ApiProperty()
-  status: number;
+  @ApiProperty({default: true})
+  @IsNotEmpty()
+  status?: number = 1;
 
-  @ApiProperty()
-  statusMsg: string;
+  @IsNotEmpty()
+  @ApiProperty({default: true})
+  statusMsg?: string = 'Active';
 
 }
