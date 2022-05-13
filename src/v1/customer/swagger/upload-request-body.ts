@@ -12,6 +12,6 @@ export const UploadRequestBody = {
     type: 'number'
   },
   dateOfBirth: {
-    type: 'integer'
+    type: 'string'
   }
 }
