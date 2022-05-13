@@ -1,6 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsEmail, IsNotEmpty, IsNumber, IsString } from "class-validator";
 import { coordinates } from '@/v1/customer/schemas/customer.schema';
+import { Transform, Type } from "class-transformer";
 
 export class CreateCustomerDto {
 
@@ -16,6 +17,7 @@ export class CreateCustomerDto {
 
   @ApiProperty()
   @IsNotEmpty()
+  @Type(() => Number)
   @IsNumber()
   mobile: number;
 
