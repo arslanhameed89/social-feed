@@ -6,7 +6,7 @@ export const CustomerProviders = [
     provide: 'CUSTOMER_MODEL',
     useFactory: (connection: Connection) : any => {
       if(!connection) return
-      return connection.model('customer', CustomerSchema, 'customer')
+      return connection.model('customer', CustomerSchema, 'customers')
     },
     inject: ['MONGODB_PROVIDER'],
   }
