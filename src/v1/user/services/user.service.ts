@@ -5,6 +5,7 @@ import { User } from '../schemas/user.schema';
 import { IUploadedFileFile } from "@/core/interfaces/IUploadedFile";
 import { UserRepository } from "@/v1/user/repository/user.repository";
 import { HashService } from "@/shared/hash/hash.service";
+import { Category } from "@/v1/categories/schemas/category.schema";
 
 @Injectable()
 export class UserService {
@@ -44,9 +45,12 @@ export class UserService {
     }
   }
 
-  async createMany(createCustomerDto: CreateUserDto[]): Promise<any> {
+  /**
+   * @param id
+   */
+  async fineOne(id: string): Promise<Category> {
     try {
-      return await this.userRepository.createMany(createCustomerDto);
+      return await this.userRepository.findOne(id);
     } catch (e) {
       console.error(e);
       throw e;
