@@ -1,21 +1,21 @@
 import { Body, Controller, Param, Patch, Post, UploadedFile, UseInterceptors } from "@nestjs/common";
 import { ApiTags } from "@nestjs/swagger";
-import { CustomerService } from './services/customer.service';
-import { CreateCustomerDto } from './dto/create-customer.dto';
-import { UpdateCustomerDto } from './dto/update-customer.dto';
-import { Customer } from './schemas/customer.schema';
+import { UserService } from './services/user.service';
+import { CreateUserDto } from './dto/create-user.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
+import { User } from './schemas/user.schema';
 import { diskStorage } from 'multer'
 import { Request } from 'express';
 import { IFile } from "@/core/interfaces";
 import { ApiFile } from "@/core/decorators/api-file/api-file-decorator";
 import { fileMimetypeFilter } from "@/shared/helpers/file-mime-type-filter";
-import { UploadRequestBody } from "@/v1/customer/swagger/upload-request-body";
+import { UploadRequestBody } from "@/v1/user/swagger/upload-request-body";
 import { randomUUID } from "crypto";
 
-@Controller('customer')
-@ApiTags('customer')
-export class CustomerController {
-  constructor(private customerService: CustomerService) {}
+@Controller('user')
+@ApiTags('user')
+export class UserController {
+  constructor(private customerService: UserService) {}
 
   /**
    * @param createCustomerDto
@@ -31,7 +31,7 @@ export class CustomerController {
     }),
     fileFilter: fileMimetypeFilter('image')
   })
-  create(@Body() createCustomerDto: CreateCustomerDto, @UploadedFile() file: Express.Multer.File): Promise<Customer> {
+  create(@Body() createCustomerDto: CreateUserDto, @UploadedFile() file: Express.Multer.File): Promise<User> {
     return this.customerService.create(createCustomerDto, file);
   }
 
@@ -47,7 +47,7 @@ export class CustomerController {
   })
   update(
     @Param('id') id: string,
-    @Body() updateCustomerDto: UpdateCustomerDto,
+    @Body() updateCustomerDto: UpdateUserDto,
     @UploadedFile() file: Express.Multer.File
   ) {
     return this.customerService.update(id, updateCustomerDto, file);

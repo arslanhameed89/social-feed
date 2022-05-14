@@ -10,7 +10,7 @@ export class coordinates {
 }
 
 @Schema({ autoCreate: true, timestamps: true })
-export class Customer extends Document {
+export class User extends Document {
 
   @Prop()
   name: string;
@@ -53,4 +53,4 @@ export class Customer extends Document {
 
 }
 
-export const CustomerSchema = SchemaFactory.createForClass(Customer);
+export const UserSchema = SchemaFactory.createForClass(User);

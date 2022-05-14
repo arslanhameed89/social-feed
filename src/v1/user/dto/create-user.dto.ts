@@ -1,9 +1,9 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsEmail, IsNotEmpty, IsNumber, IsString } from "class-validator";
-import { coordinates } from '@/v1/customer/schemas/customer.schema';
+import { coordinates } from '@/v1/user/schemas/user.schema';
 import { Transform, Type } from "class-transformer";
 
-export class CreateCustomerDto {
+export class CreateUserDto {
 
   @ApiProperty()
   @IsNotEmpty()
