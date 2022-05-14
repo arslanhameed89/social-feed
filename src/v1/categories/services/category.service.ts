@@ -14,12 +14,12 @@ export class CategoryService {
   async create(dto: createCategoryDto): Promise<Category> {
     try {
       const query = {
-        'categoryName.en': new RegExp(['^', dto.name, '$'].join(''), 'i'),
+        'name': new RegExp(['^', dto.name, '$'].join(''), 'i'),
       };
 
       const data = await this.categoryRepository.findOneByQuery(query);
 
-      if (data.length > 0) {
+      if (data && data.length > 0) {
         throw new HttpException(
           'category already exist!',
           HttpStatus.BAD_REQUEST,
@@ -29,6 +29,7 @@ export class CategoryService {
       return await this.categoryRepository.create(dto);
 
     } catch (e) {
+      console.info(e);
 
       throw e;
     }

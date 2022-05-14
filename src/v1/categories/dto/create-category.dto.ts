@@ -15,6 +15,6 @@ export class createCategoryDto {
   status?: number = 1;
 
   @IsNotEmpty()
-  @ApiProperty({default: true})
+  @ApiProperty({default: 'Active'})
   statusMsg?: string = 'Active';
 }
