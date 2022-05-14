@@ -1,4 +1,4 @@
-import { Body, Controller, Param, Patch, Post, UploadedFile } from "@nestjs/common";
+import { Body, Controller, Get, Param, Patch, Post, UploadedFile } from "@nestjs/common";
 import { ApiTags } from '@nestjs/swagger';
 import { PostService } from './services/post.service';
 import { CreatePostDto } from './dto/create-post.dto';
@@ -15,7 +15,7 @@ import { fileMimetypeFilter } from "@/shared/helpers/file-mime-type-filter";
 @Controller('post')
 @ApiTags('post')
 export class PostController {
-  constructor(private customerService: PostService) {}
+  constructor(private postService: PostService) {}
 
   @Post()
   @ApiFile('image', true, UploadRequestBody, {
@@ -29,7 +29,7 @@ export class PostController {
   })
   create(@Body() createPostDto: CreatePostDto,
          @UploadedFile() file: Express.Multer.File): Promise<PostSchema> {
-    return this.customerService.create(createPostDto, file);
+    return this.postService.create(createPostDto, file);
   }
 
   @Patch(':id')
@@ -37,7 +37,12 @@ export class PostController {
     @Param('id') id: string,
     @Body() updatePostDto: UpdatePostDto,
   ): Promise<PostSchema> {
-    return this.customerService.update(id, updatePostDto);
+    return this.postService.update(id, updatePostDto);
+  }
+
+  @Get()
+  async findAll(): Promise<PostSchema[]> {
+    return await this.postService.findAll();
   }
 
 }
