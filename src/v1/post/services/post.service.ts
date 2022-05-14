@@ -4,6 +4,7 @@ import { CreatePostDto } from '../dto/create-post.dto';
 import { UpdatePostDto } from '../dto/update-post.dto';
 import { Post } from '../schemas/post.schema';
 import { IUploadedFileFile } from "@/core/interfaces/IUploadedFile";
+import { ObtainPostDto } from "@/v1/post/dto/obtain-post.dto";
 
 @Injectable()
 export class PostService {
@@ -22,9 +23,9 @@ export class PostService {
     }
   }
 
-  async findAll(): Promise<Post[]> {
+  async findAll(obtainPostDto: ObtainPostDto): Promise<Post[]> {
     try {
-      return await this.postRepository.find();
+      return await this.postRepository.findAll(obtainPostDto);
     } catch (e) {
       console.error(e);
       throw e;

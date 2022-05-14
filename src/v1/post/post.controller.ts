@@ -11,6 +11,7 @@ import { Request } from "express";
 import { IFile } from "@/core/interfaces";
 import { randomUUID } from "crypto";
 import { fileMimetypeFilter } from "@/shared/helpers/file-mime-type-filter";
+import { ObtainPostDto } from "@/v1/post/dto/obtain-post.dto";
 
 @Controller('post')
 @ApiTags('post')
@@ -40,12 +41,12 @@ export class PostController {
     return this.postService.update(id, updatePostDto);
   }
 
-  @Get()
-  async findAll(): Promise<PostSchema[]> {
-    return await this.postService.findAll();
+  @Post('feed')
+  async findAll(@Body() obtainPostDto: ObtainPostDto): Promise<PostSchema[]> {
+    return await this.postService.findAll(obtainPostDto);
   }
 
-  @Patch('/like/:id')
+  @Patch('like/:id')
   likePost(
     @Param('id') id: string
   ): Promise<PostSchema> {
