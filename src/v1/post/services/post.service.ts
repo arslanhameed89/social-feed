@@ -13,7 +13,7 @@ export class PostService {
     try {
       const data  = {
         ...createPostDto,
-        image: file.path
+        image: file.filename
       }
       return await this.postRepository.create(<Post>data);
     } catch (e) {
