@@ -5,12 +5,14 @@ import { UserProviders } from '@/v1/user/providers/user.providers';
 import { CoreModule } from '@/core/core.module';
 import { UserService } from "@/v1/user/services/user.service";
 import { UserRepository } from "@/v1/user/repository/user.repository";
+import { HashModule } from "@/shared/hash/hash.module";
 
 @Global()
 @Module({
   imports: [
     ProvidersModule, 
-    CoreModule
+    CoreModule,
+    HashModule
   ],
   controllers: [UserController],
   providers: [UserService, UserRepository, ...UserProviders],

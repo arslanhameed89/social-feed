@@ -4,16 +4,19 @@ import { UpdateUserDto } from '../dto/update-user.dto';
 import { User } from '../schemas/user.schema';
 import { IUploadedFileFile } from "@/core/interfaces/IUploadedFile";
 import { UserRepository } from "@/v1/user/repository/user.repository";
+import { HashService } from "@/shared/hash/hash.service";
 
 @Injectable()
 export class UserService {
-  constructor(private userRepository: UserRepository) {}
+  constructor(private userRepository: UserRepository,
+              private hashService: HashService) {}
 
   async create(createCustomerDto: CreateUserDto, file: IUploadedFileFile): Promise<User> {
     try {
       //@TODO: convert to transformer
       const data: Record<string, any> = {
         ...createCustomerDto,
+        password: await this.hashService.hashPassword(createCustomerDto.password),
         profilePic: file.filename
       }
 
