@@ -12,7 +12,7 @@ async function bootstrap() {
   );
   const config = app.get(ConfigService);
 
-  app.setGlobalPrefix('api/v1')
+  app.setGlobalPrefix(config.get('APP.API_GLOBAL_PREFIX'))
   app.useGlobalPipes(new ValidationPipe({ transform: true }));
   app.useStaticAssets(join(__dirname, '..', 'uploads-tmp'), {
     prefix: config.get('APP.IMAGE_SERVER_PATH'),
