@@ -36,11 +36,21 @@ export class CustomerController {
   }
 
   @Patch(':id')
+  @ApiFile('profilePic', true, UploadRequestBody, {
+    storage: diskStorage({
+      destination: './uploads-tmp',
+      filename: (req: Request, file: IFile, callback: (error: Error | null, filename: string) => void) => {
+        callback(null, `${randomUUID()} - ${file.originalname}`);
+      }
+    }),
+    fileFilter: fileMimetypeFilter('image')
+  })
   update(
     @Param('id') id: string,
     @Body() updateCustomerDto: UpdateCustomerDto,
+    @UploadedFile() file: Express.Multer.File
   ) {
-    return this.customerService.update(id, updateCustomerDto);
+    return this.customerService.update(id, updateCustomerDto, file);
   }
 
 }

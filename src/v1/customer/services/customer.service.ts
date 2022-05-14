@@ -12,12 +12,29 @@ export class CustomerService {
   async create(createCustomerDto: CreateCustomerDto, file: IUploadedFileFile): Promise<Customer> {
     try {
       //@TODO: convert to transformer
-      const data  = {
+      const data: Record<string, any> = {
         ...createCustomerDto,
         profilePic: file.path
       }
 
       return await this.customerRepository.create(<Customer>data);
+    } catch (e) {
+      console.error(e);
+      throw e;
+    }
+  }
+
+  async update(
+    id: string,
+    updateCustomerDto: UpdateCustomerDto,
+    file: IUploadedFileFile
+  ): Promise<Customer> {
+    try {
+      const data: Record<string, any> = {
+        ...updateCustomerDto,
+        profilePic: file.path
+      }
+      return await this.customerRepository.update(id, data);
     } catch (e) {
       console.error(e);
       throw e;
@@ -46,17 +63,6 @@ export class CustomerService {
     return `This action returns a #${id} test`;
   }
 
-  async update(
-    id: string,
-    updateCustomerDto: UpdateCustomerDto,
-  ): Promise<Customer> {
-    try {
-      return await this.customerRepository.update(id, updateCustomerDto);
-    } catch (e) {
-      console.error(e);
-      throw e;
-    }
-  }
 
   async remove(id: string): Promise<Customer> {
     try {
