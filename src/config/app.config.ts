@@ -19,4 +19,5 @@ export default registerAs('APP', () => ({
   TIME_ZONE: env.TIME_ZONE || 'Asia/Dubai',
   WORKING_DIRECTORY: process.env.PWD || process.cwd(),
   IMAGE_SERVER_PATH: '/public',
+  SALT_ROUND: env.SALT_ROUND ? parseInt(env.SALT_ROUND) : 10,
 }));
