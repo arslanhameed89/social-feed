@@ -17,5 +17,6 @@ export default registerAs('APP', () => ({
     PER_PAGE: env.PAGINATION_PER_PAGE || 40,
   },
   TIME_ZONE: env.TIME_ZONE || 'Asia/Dubai',
-  workingDirectory: process.env.PWD || process.cwd(),
+  WORKING_DIRECTORY: process.env.PWD || process.cwd(),
+  IMAGE_SERVER_PATH: '/public',
 }));
