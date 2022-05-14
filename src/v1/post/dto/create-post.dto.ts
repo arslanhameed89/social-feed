@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsMongoId, IsNotEmpty } from "class-validator";
+import { IsArray, IsMongoId, IsNotEmpty, IsString } from "class-validator";
+import { Transform, Type } from "class-transformer";
 
 export class CreatePostDto {
 
@@ -22,6 +23,10 @@ export class CreatePostDto {
 
   @ApiProperty()
   @IsNotEmpty()
+  @IsArray()
+  @IsString({ each: true })
+  @Type(() => String)
+  @Transform(({ value }) => value.split(','))
   tags: [];
 
   @ApiProperty()
