@@ -3,14 +3,19 @@ import { PostRepository } from '../repository/post.repository';
 import { CreatePostDto } from '../dto/create-post.dto';
 import { UpdatePostDto } from '../dto/update-post.dto';
 import { Post } from '../schemas/post.schema';
+import { IUploadedFileFile } from "@/core/interfaces/IUploadedFile";
 
 @Injectable()
 export class PostService {
   constructor(private postRepository: PostRepository) {}
 
-  async create(createPostDto: CreatePostDto): Promise<Post> {
+  async create(createPostDto: CreatePostDto, file: IUploadedFileFile): Promise<Post> {
     try {
-      return await this.postRepository.create(<Post>createPostDto);
+      const data  = {
+        ...createPostDto,
+        image: file.path
+      }
+      return await this.postRepository.create(<Post>data);
     } catch (e) {
       console.error(e);
       throw e;
