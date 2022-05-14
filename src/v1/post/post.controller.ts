@@ -45,4 +45,11 @@ export class PostController {
     return await this.postService.findAll();
   }
 
+  @Patch('/like/:id')
+  likePost(
+    @Param('id') id: string
+  ): Promise<PostSchema> {
+    return this.postService.likePost(id);
+  }
+
 }

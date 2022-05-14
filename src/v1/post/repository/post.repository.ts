@@ -10,4 +10,23 @@ export class PostRepository extends BaseRepository<Post> {
   ) {
     super(customerModel);
   }
+
+  async likeQuery(id: string): Promise<Post> {
+    try {
+      const query = {
+       _id: new Types.ObjectId(id)
+      };
+      const queryData = {
+        $inc: {
+          likesCount: 1,
+        },
+      };
+      return await this.customerModel.findOneAndUpdate(query, queryData).exec();
+
+    } catch (e) {
+      console.info(e);
+      throw e;
+    }
+  }
+
 }

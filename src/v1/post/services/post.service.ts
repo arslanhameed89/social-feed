@@ -43,9 +43,9 @@ export class PostService {
     }
   }
 
-  async remove(id: string): Promise<Post> {
+  async likePost(id: string): Promise<Post> {
     try {
-      return await this.postRepository.delete(id);
+      return await this.postRepository.likeQuery(id);
     } catch (e) {
       console.error(e);
       throw e;
