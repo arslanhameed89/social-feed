@@ -8,9 +8,10 @@ export default registerAs('APP', () => ({
   PORT: env.PORT ? parseInt(env.PORT, 10) : 3000,
   SERVER: env.SERVER || `http://localhost:3000`,
   APP_NAME: env.APP_NAME || `SOCIAL-FEED`,
+  API_GLOBAL_PREFIX: env.API_GLOBAL_PREFIX || `api/v1`,
   DB: {
     MONGODB_URL:
-      env.MONGODDB_CONNECTION_STRING || 'mongodb://localhost/social-feed',
+      env.MONGODDB_CONNECTION_STRING || 'mongodb://localhost:27017/social-feed',
   },
   NODE_ENV: env.NODE_ENV || 'development',
   PAGINATION: {
