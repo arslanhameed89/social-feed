@@ -280,6 +280,21 @@ export class BaseRepository<T> implements IRepository<T> {
     }
   }
 
+  async findByQueryAndSortByCondition(
+    query: Record<string, any>,
+    sortQuery = {},
+    filterFields = {},
+  ): Promise<any> {
+    try {
+      return await this._model
+        .find(query, filterFields)
+        .sort(sortQuery)
+        .lean();
+    } catch (err) {
+      throw err;
+    }
+  }
+
   async findOneAndSortByCondition(
     query: Record<string, any>,
     sortQuery = {},
