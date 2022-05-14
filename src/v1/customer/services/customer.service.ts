@@ -14,7 +14,7 @@ export class CustomerService {
       //@TODO: convert to transformer
       const data: Record<string, any> = {
         ...createCustomerDto,
-        profilePic: file.path
+        profilePic: file.filename
       }
 
       return await this.customerRepository.create(<Customer>data);
@@ -32,7 +32,7 @@ export class CustomerService {
     try {
       const data: Record<string, any> = {
         ...updateCustomerDto,
-        profilePic: file.path
+        profilePic: file.filename
       }
       return await this.customerRepository.update(id, data);
     } catch (e) {
