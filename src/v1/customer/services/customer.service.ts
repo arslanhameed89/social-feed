@@ -11,9 +11,13 @@ export class CustomerService {
 
   async create(createCustomerDto: CreateCustomerDto, file: IUploadedFileFile): Promise<Customer> {
     try {
-      console.log(createCustomerDto, file, 'androoo')
+      //@TODO: convert to transformer
+      const data  = {
+        ...createCustomerDto,
+        profilePic: file.path
+      }
 
-      return await this.customerRepository.create(<Customer>createCustomerDto);
+      return await this.customerRepository.create(<Customer>data);
     } catch (e) {
       console.error(e);
       throw e;
