@@ -10,6 +10,7 @@ import { PostRepository } from "@/v1/post/repository/post.repository";
 
 describe('PostService', () => {
   let service: PostService;
+  let repository: PostRepository;
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       imports: [
@@ -23,9 +24,14 @@ describe('PostService', () => {
       providers: [...PostProviders, PostService, PostRepository],
     }).compile();
     service = module.get<PostService>(PostService);
+    repository = module.get<PostRepository>(PostRepository);
   });
 
-  it('should be defined', () => {
+  it('post service should be defined', () => {
+    expect(service).toBeDefined();
+  });
+
+  it('post repository should be defined', () => {
     expect(service).toBeDefined();
   });
 
