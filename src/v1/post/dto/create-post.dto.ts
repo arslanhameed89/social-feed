@@ -27,7 +27,7 @@ export class CreatePostDto {
   @IsString({ each: true })
   @Type(() => String)
   @Transform(({ value }) => value.split(','))
-  tags: [];
+  tags: string[];
 
   @ApiProperty()
   image: string;

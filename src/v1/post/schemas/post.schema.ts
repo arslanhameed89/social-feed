@@ -29,7 +29,7 @@ export class Post extends Document {
   viewsCount: number;
 
   @Prop()
-  tags: [];
+  tags: string[];
 
   @Prop()
   status: number;
