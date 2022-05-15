@@ -10,10 +10,13 @@ import { PostRepository } from "@/v1/post/repository/post.repository";
 import { plainToInstance } from "class-transformer";
 import { validate } from "class-validator";
 import { CreatePostDto } from "@/v1/post/dto/create-post.dto";
+import { PostController } from "@/v1/post/post.controller";
 
 describe('Post Controller', () => {
   let service: PostService;
   let repository: PostRepository;
+  let postController: PostController;
+
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       imports: [
@@ -24,10 +27,16 @@ describe('Post Controller', () => {
         ProvidersModule,
         CoreModule
       ],
+      controllers: [PostController],
       providers: [...PostProviders, PostService, PostRepository],
     }).compile();
     service = module.get<PostService>(PostService);
     repository = module.get<PostRepository>(PostRepository);
+    postController = module.get<PostController>(PostController);
+  });
+
+  it('post controller should be defined', () => {
+    expect(postController).toBeDefined();
   });
 
   it('should throw when title is empty.', async () => {
@@ -45,5 +54,6 @@ describe('Post Controller', () => {
     expect(errors.length).toBe(0)
     expect(JSON.stringify(errors)).toEqual('[]')
   });
+
 
 });
