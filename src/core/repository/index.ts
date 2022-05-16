@@ -1,2 +1,2 @@
-export * from "./baseRepository";
-export * from "./IRepository";
+export * from './baseRepository'
+export * from './IRepository'

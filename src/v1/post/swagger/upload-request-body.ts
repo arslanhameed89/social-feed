@@ -1,21 +1,21 @@
 export const UploadRequestBody = {
   author: {
-    type: "string",
+    type: 'string'
   },
   title: {
-    type: "string",
+    type: 'string'
   },
   content: {
-    type: "string",
+    type: 'string'
   },
   category: {
-    type: "string",
+    type: 'string'
   },
   tags: {
-    type: "array",
+    type: 'array',
     items: {
-      type: "string",
+      type: 'string'
     },
-    description: "Tags in array []",
-  },
-};
+    description: 'Tags in array []'
+  }
+}

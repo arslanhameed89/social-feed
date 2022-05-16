@@ -1,60 +1,59 @@
-import mongoose from "mongoose";
-import { IRepository } from "./IRepository";
-import { Types } from "mongoose";
+import mongoose, { Types } from 'mongoose'
+import { IRepository } from './IRepository'
 
 export class BaseRepository<T> implements IRepository<T> {
-  private readonly _model: mongoose.Model<mongoose.Document>;
+  private readonly _model: mongoose.Model<mongoose.Document>
 
-  constructor(schemaModel: mongoose.Model<mongoose.Document>) {
-    this._model = schemaModel;
+  constructor (schemaModel: mongoose.Model<mongoose.Document>) {
+    this._model = schemaModel
   }
 
-  async create(item: T): Promise<any> {
+  async create (item: T): Promise<any> {
     try {
-      return await this._model.create(item);
+      return await this._model.create(item)
     } catch (err) {
-      throw err;
+      throw err
     }
   }
 
-  async createMany(item: any[]): Promise<any> {
+  async createMany (item: any[]): Promise<any> {
     try {
-      return await this._model.insertMany(item);
+      return await this._model.insertMany(item)
     } catch (err) {
-      throw err;
+      throw err
     }
   }
 
-  async createPartial(item: Partial<T>): Promise<any> {
+  async createPartial (item: Partial<T>): Promise<any> {
     try {
-      const objectToSave = new this._model(item);
-      return await objectToSave.save();
+      const objectToSave = new this._model(item)
+      return await objectToSave.save()
     } catch (err) {
-      throw err;
+      throw err
     }
   }
 
-  async update(id: string, item: Partial<T>): Promise<any> {
+  async update (id: string, item: Partial<T>): Promise<any> {
     try {
       return await this._model
         .findOneAndUpdate(
           {
-            _id: id,
+            _id: id
           },
           {
-            $set: item,
+            $set: item
           },
           {
-            new: true,
+            new: true
           }
         )
-        .exec();
+        .exec()
     } catch (err) {
-      throw err;
+      throw err
     }
   }
 
-  async updateByQuery(
+  async updateByQuery (
     condition: Record<string, any>,
     item: Record<string, any>,
     options = { new: true }
@@ -64,17 +63,17 @@ export class BaseRepository<T> implements IRepository<T> {
         .findOneAndUpdate(
           condition,
           {
-            $set: item,
+            $set: item
           },
           options
         )
-        .exec();
+        .exec()
     } catch (err) {
-      throw err;
+      throw err
     }
   }
 
-  async updateAndPushByQuery(
+  async updateAndPushByQuery (
     condition: Record<string, any>,
     item: Record<string, any>,
     pushItem: Record<string, any>,
@@ -86,14 +85,14 @@ export class BaseRepository<T> implements IRepository<T> {
           condition,
           {
             $set: item,
-            $push: pushItem,
+            $push: pushItem
           },
           options
         )
         .lean()
-        .exec();
+        .exec()
     } catch (err) {
-      throw err;
+      throw err
     }
   }
 
@@ -103,7 +102,7 @@ export class BaseRepository<T> implements IRepository<T> {
    * @param pushItem
    * @param options
    */
-  async pushByQuery(
+  async pushByQuery (
     condition: Record<string, any>,
     pushItem: Record<string, any>,
     options = { new: true }
@@ -113,51 +112,51 @@ export class BaseRepository<T> implements IRepository<T> {
         .findOneAndUpdate(
           condition,
           {
-            $push: pushItem,
+            $push: pushItem
           },
           options
         )
-        .exec();
+        .exec()
     } catch (err) {
-      throw err;
+      throw err
     }
   }
 
-  async delete(id: string): Promise<any> {
+  async delete (id: string): Promise<any> {
     try {
       return await this._model
         .findOneAndDelete({
-          _id: new Types.ObjectId(id),
+          _id: new Types.ObjectId(id)
         })
-        .exec();
+        .exec()
     } catch (err) {
-      throw err;
+      throw err
     }
   }
 
-  async deleteManyByIds(ids: string[]): Promise<any> {
+  async deleteManyByIds (ids: string[]): Promise<any> {
     try {
       return await this._model
         .deleteMany({
           _id: {
-            $in: ids,
-          },
+            $in: ids
+          }
         })
-        .exec();
+        .exec()
     } catch (err) {
-      throw err;
+      throw err
     }
   }
 
-  async find(query = {}): Promise<any> {
+  async find (query = {}): Promise<any> {
     try {
-      return await this._model.find(query).lean().exec();
+      return await this._model.find(query).lean().exec()
     } catch (err) {
-      throw err;
+      throw err
     }
   }
 
-  async findWIthSkipAndLimit(
+  async findWIthSkipAndLimit (
     query = {},
     skip: number,
     limit: number
@@ -168,131 +167,132 @@ export class BaseRepository<T> implements IRepository<T> {
         .skip(skip)
         .limit(limit)
         .lean()
-        .exec();
+        .exec()
     } catch (err) {
-      throw err;
+      throw err
     }
   }
 
-  async findOne(id: string): Promise<any> {
+  async findOne (id: string): Promise<any> {
     try {
-      return await this._model.findOne({ _id: id }).lean().exec();
+      return await this._model.findOne({ _id: id }).lean().exec()
     } catch (err) {
-      throw err;
+      throw err
     }
   }
-  async findOneByQuery(
+
+  async findOneByQuery (
     query: Record<string, any>,
     filterFields?: Record<string, any>
   ): Promise<any> {
     try {
-      return await this._model.findOne(query, filterFields).lean().exec();
+      return await this._model.findOne(query, filterFields).lean().exec()
     } catch (err) {
-      throw err;
+      throw err
     }
   }
 
-  async findAllByQuery(
+  async findAllByQuery (
     query: Record<string, any>,
     filterFields?: Record<string, any>
   ): Promise<any> {
     try {
-      return await this._model.find(query, filterFields).lean().exec();
+      return await this._model.find(query, filterFields).lean().exec()
     } catch (err) {
-      throw err;
+      throw err
     }
   }
 
-  async countByQuery(query: Record<string, any>): Promise<any> {
+  async countByQuery (query: Record<string, any>): Promise<any> {
     try {
-      return await this._model.countDocuments(query).exec();
+      return await this._model.countDocuments(query).exec()
     } catch (err) {
-      throw err;
+      throw err
     }
   }
 
-  async aggregate(query: any[], offset = 0, limit = 50): Promise<any> {
+  async aggregate (query: any[], offset = 0, limit = 50): Promise<any> {
     try {
       return await this._model
         .aggregate(query)
         .skip(offset)
         .limit(limit)
-        .exec();
+        .exec()
     } catch (err) {
-      throw err;
+      throw err
     }
   }
 
-  async aggregateAll(query: any[]): Promise<any> {
+  async aggregateAll (query: any[]): Promise<any> {
     try {
-      return await this._model.aggregate(query).exec();
+      return await this._model.aggregate(query).exec()
     } catch (err) {
-      throw err;
+      throw err
     }
   }
 
-  async distinct(field: string, query: Record<string, any>): Promise<any> {
+  async distinct (field: string, query: Record<string, any>): Promise<any> {
     try {
-      return await this._model.distinct(field, query).exec();
+      return await this._model.distinct(field, query).exec()
     } catch (err) {
-      throw err;
+      throw err
     }
   }
 
-  async pushData(query = {}, pushData = {}): Promise<any> {
-    try {
-      return await this._model
-        .update(query, {
-          $push: pushData,
-        })
-        .exec();
-    } catch (err) {
-      throw err;
-    }
-  }
-
-  async pullData(query = {}, pullQuery = {}): Promise<any> {
+  async pushData (query = {}, pushData = {}): Promise<any> {
     try {
       return await this._model
         .update(query, {
-          $pull: pullQuery,
+          $push: pushData
         })
-        .exec();
+        .exec()
     } catch (err) {
-      throw err;
+      throw err
     }
   }
 
-  async findOneAndPullData(query = {}, pullQuery = {}): Promise<any> {
+  async pullData (query = {}, pullQuery = {}): Promise<any> {
+    try {
+      return await this._model
+        .update(query, {
+          $pull: pullQuery
+        })
+        .exec()
+    } catch (err) {
+      throw err
+    }
+  }
+
+  async findOneAndPullData (query = {}, pullQuery = {}): Promise<any> {
     try {
       return await this._model
         .findOneAndUpdate(
           query,
           {
-            $pull: pullQuery,
+            $pull: pullQuery
           },
           { new: true }
         )
         .lean()
-        .exec();
+        .exec()
     } catch (err) {
-      throw err;
+      throw err
     }
   }
 
-  async findByQueryAndSortByCondition(
+  async findByQueryAndSortByCondition (
     query: Record<string, any>,
     sortQuery = {},
     filterFields = {}
   ): Promise<any> {
     try {
-      return await this._model.find(query, filterFields).sort(sortQuery).lean();
+      return await this._model.find(query, filterFields).sort(sortQuery).lean()
     } catch (err) {
-      throw err;
+      throw err
     }
   }
 
-  async findOneAndSortByCondition(
+  async findOneAndSortByCondition (
     query: Record<string, any>,
     sortQuery = {},
     filterFields = {}
@@ -301,17 +301,17 @@ export class BaseRepository<T> implements IRepository<T> {
       return await this._model
         .findOne(query, filterFields)
         .sort(sortQuery)
-        .lean();
+        .lean()
     } catch (err) {
-      throw err;
+      throw err
     }
   }
 
-  async writeBulk(item = []): Promise<any> {
+  async writeBulk (item = []): Promise<any> {
     try {
-      return await this._model.bulkWrite(item);
+      return await this._model.bulkWrite(item)
     } catch (e) {
-      throw e;
+      throw e
     }
   }
 }

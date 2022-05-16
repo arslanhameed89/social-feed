@@ -1,54 +1,55 @@
-import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-import { Document } from "mongoose";
-import { ApiProperty } from "@nestjs/swagger";
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
+import { Document } from 'mongoose'
+import { ApiProperty } from '@nestjs/swagger'
 
 export class coordinates {
   @ApiProperty()
-  longitude: number;
+    longitude: number
+
   @ApiProperty()
-  latitude: number;
+    latitude: number
 }
 
 @Schema({ autoCreate: true, timestamps: true })
 export class User extends Document {
   @Prop()
-  name: string;
+    name: string
 
   @Prop()
-  password: string;
+    password: string
 
   @Prop()
-  dateOfBirth: string;
+    dateOfBirth: string
 
   @Prop()
-  email: string;
+    email: string
 
   @Prop()
-  emailVerified: string;
+    emailVerified: string
 
   @Prop()
-  mobile: number;
+    mobile: number
 
   @Prop()
-  mobileVerified: boolean;
+    mobileVerified: boolean
 
   @Prop({ type: coordinates })
-  coordinates: coordinates;
+    coordinates: coordinates
 
   @Prop()
-  ip: string;
+    ip: string
 
   @Prop()
-  loginType: number;
+    loginType: number
 
   @Prop()
-  profilePic: string;
+    profilePic: string
 
   @Prop()
-  status: number;
+    status: number
 
   @Prop()
-  statusMsg: string;
+    statusMsg: string
 }
 
-export const UserSchema = SchemaFactory.createForClass(User);
+export const UserSchema = SchemaFactory.createForClass(User)

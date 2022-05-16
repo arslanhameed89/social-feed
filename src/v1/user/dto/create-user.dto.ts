@@ -1,49 +1,49 @@
-import { ApiProperty } from "@nestjs/swagger";
-import { IsEmail, IsNotEmpty, IsNumber, IsString } from "class-validator";
-import { coordinates } from "@/v1/user/schemas/user.schema";
-import { Transform, Type } from "class-transformer";
+import { ApiProperty } from '@nestjs/swagger'
+import { IsEmail, IsNotEmpty, IsNumber, IsString } from 'class-validator'
+import { coordinates } from '@/v1/user/schemas/user.schema'
+import { Transform, Type } from 'class-transformer'
 
 export class CreateUserDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
-  name: string;
+    name: string
 
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
-  password: string;
+    password: string
 
   @ApiProperty()
   @IsNotEmpty()
   @Type(() => Number)
   @IsNumber()
-  mobile: number;
+    mobile: number
 
   @ApiProperty()
   @IsNotEmpty()
   @IsEmail()
-  email: string;
+    email: string
 
   @ApiProperty()
-  emailVerified: string;
+    emailVerified: string
 
   @ApiProperty({ type: coordinates })
-  coordinates: coordinates;
+    coordinates: coordinates
 
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
-  dateOfBirth: string;
+    dateOfBirth: string
 
   @ApiProperty()
-  profilePic: string;
+    profilePic: string
 
   @ApiProperty({ default: true })
   @IsNotEmpty()
-  status?: number = 1;
+    status?: number = 1
 
   @IsNotEmpty()
   @ApiProperty({ default: true })
-  statusMsg?: string = "Active";
+    statusMsg?: string = 'Active'
 }

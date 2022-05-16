@@ -1,45 +1,45 @@
-import { ApiProperty } from "@nestjs/swagger";
-import { IsArray, IsMongoId, IsNotEmpty, IsString } from "class-validator";
-import { Transform, Type } from "class-transformer";
+import { ApiProperty } from '@nestjs/swagger'
+import { IsArray, IsMongoId, IsNotEmpty, IsString } from 'class-validator'
+import { Transform, Type } from 'class-transformer'
 
 export class CreatePostDto {
   @ApiProperty()
   @IsNotEmpty()
-  author: string;
+    author: string
 
   @ApiProperty()
   @IsNotEmpty()
-  title: string;
+    title: string
 
   @ApiProperty()
   @IsNotEmpty()
-  content: string;
+    content: string
 
   @ApiProperty()
   @IsNotEmpty()
   @IsMongoId()
-  category: string;
+    category: string
 
   @ApiProperty()
   @IsNotEmpty()
   @IsArray()
   @IsString({ each: true })
   @Type(() => String)
-  @Transform(({ value }) => value.split(","))
-  tags: string[];
+  @Transform(({ value }) => value.split(','))
+    tags: string[]
 
   @ApiProperty()
-  image: string;
+    image: string
 
   @ApiProperty()
-  likes: [];
+    likes: []
 
   @ApiProperty()
-  likesCount: number;
+    likesCount: number
 
   @ApiProperty()
-  status: number;
+    status: number
 
   @ApiProperty()
-  statusMsg: string;
+    statusMsg: string
 }

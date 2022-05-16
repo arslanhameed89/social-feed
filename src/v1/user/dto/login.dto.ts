@@ -1,53 +1,53 @@
-import { ApiProperty } from "@nestjs/swagger";
-import { IsNotEmpty } from "class-validator";
+import { ApiProperty } from '@nestjs/swagger'
+import { IsNotEmpty } from 'class-validator'
 
 export class LoginDto {
   @ApiProperty()
   @IsNotEmpty()
-  phone: string;
+    phone: string
 
   @ApiProperty()
   @IsNotEmpty()
-  password: string;
+    password: string
 
   @ApiProperty()
   @IsNotEmpty()
-  deviceId: string;
+    deviceId: string
 
   @ApiProperty()
   @IsNotEmpty()
-  pushToken: string;
+    pushToken: string
 
   @ApiProperty()
   @IsNotEmpty()
-  appVersion: string;
+    appVersion: string
 
   @ApiProperty()
   @IsNotEmpty()
-  deviceMake: string;
+    deviceMake: string
 
   @ApiProperty()
   @IsNotEmpty()
-  deviceModel: string;
+    deviceModel: string
 
   @ApiProperty()
   @IsNotEmpty()
-  deviceType: string;
+    deviceType: string
 
   @ApiProperty()
   @IsNotEmpty()
-  deviceTime: string;
+    deviceTime: string
 
   @ApiProperty()
   @IsNotEmpty()
-  countryCode: string;
+    countryCode: string
 
   @ApiProperty()
-  deviceOsVersion: string;
+    deviceOsVersion: string
 
   @ApiProperty()
-  latitude: string;
+    latitude: string
 
   @ApiProperty()
-  longitude: string;
+    longitude: string
 }

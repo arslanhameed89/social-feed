@@ -1,17 +1,17 @@
-import { Inject, Injectable } from "@nestjs/common";
-import { Model, Types } from "mongoose";
-import { BaseRepository } from "@/core/repository";
-import { User } from "@/v1/user/schemas/user.schema";
+import { Inject, Injectable } from '@nestjs/common'
+import { Model, Types } from 'mongoose'
+import { BaseRepository } from '@/core/repository'
+import { User } from '@/v1/user/schemas/user.schema'
 
 @Injectable()
 export class UserRepository extends BaseRepository<User> {
-  constructor(
-    @Inject("USER_MODEL") private readonly customerModel: Model<User>
+  constructor (
+    @Inject('USER_MODEL') private readonly customerModel: Model<User>
   ) {
-    super(customerModel);
+    super(customerModel)
   }
 
-  async updateCustomer(
+  async updateCustomer (
     userId: string,
     updateQuery: Record<string, any>
   ): Promise<any> {
@@ -19,9 +19,9 @@ export class UserRepository extends BaseRepository<User> {
       return await this.customerModel.findOneAndUpdate(
         { _id: new Types.ObjectId(userId) },
         updateQuery
-      );
+      )
     } catch (err) {
-      throw err;
+      throw err
     }
   }
 }

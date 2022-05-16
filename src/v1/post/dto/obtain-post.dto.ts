@@ -1,15 +1,15 @@
-import { ApiProperty } from "@nestjs/swagger";
-import { IsNotEmpty } from "class-validator";
+import { ApiProperty } from '@nestjs/swagger'
+import { IsNotEmpty } from 'class-validator'
 
 export class ObtainPostDto {
-  @ApiProperty({ default: "desc" })
+  @ApiProperty({ default: 'desc' })
   @IsNotEmpty()
-  sort?: string = "desc";
+    sort?: string = 'desc'
 
-  //date | tag
+  // date | tag
   @ApiProperty()
-  filterBy?: string;
+    filterBy?: string
 
   @ApiProperty()
-  filterKey?: string;
+    filterKey?: string
 }

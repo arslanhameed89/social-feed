@@ -1,40 +1,40 @@
-import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-import { Document } from "mongoose";
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
+import { Document } from 'mongoose'
 
 @Schema({ autoCreate: true, timestamps: true })
 export class Post extends Document {
   @Prop()
-  author: string;
+    author: string
 
   @Prop()
-  title: string;
+    title: string
 
   @Prop()
-  content: string;
+    content: string
 
   @Prop()
-  image: string;
+    image: string
 
   @Prop()
-  category: string;
+    category: string
 
   @Prop()
-  likes: [];
+    likes: []
 
   @Prop()
-  likesCount: number;
+    likesCount: number
 
   @Prop()
-  viewsCount: number;
+    viewsCount: number
 
   @Prop()
-  tags: string[];
+    tags: string[]
 
   @Prop()
-  status: number;
+    status: number
 
   @Prop()
-  statusMsg: string;
+    statusMsg: string
 }
 
-export const PostSchema = SchemaFactory.createForClass(Post);
+export const PostSchema = SchemaFactory.createForClass(Post)

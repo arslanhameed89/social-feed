@@ -3,5 +3,5 @@ export const customerStatus = {
   VERIFIED: 1,
   DEACTIVATED: 2,
   BANNED: 3,
-  DELETED: 4,
-};
+  DELETED: 4
+}

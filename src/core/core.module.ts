@@ -1,10 +1,10 @@
-import { Module, Global } from "@nestjs/common";
-import { BaseRepository } from "./repository";
+import { Module, Global } from '@nestjs/common'
+import { BaseRepository } from './repository'
 
 @Global()
 @Module({
   imports: [],
   providers: [BaseRepository],
-  exports: [BaseRepository],
+  exports: [BaseRepository]
 })
 export class CoreModule {}
