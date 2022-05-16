@@ -43,7 +43,7 @@ export interface IRepository<T> {
    */
   findOneByQuery(
     query: Record<string, any>,
-    filterFields: Record<string, any>,
+    filterFields: Record<string, any>
   ): Promise<T>;
 
   /**

@@ -1,6 +1,6 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { ConfigModule } from '@nestjs/config';
-import appConfig from '../../config/app.config';
+import { Test, TestingModule } from "@nestjs/testing";
+import { ConfigModule } from "@nestjs/config";
+import appConfig from "../../config/app.config";
 import { Post, PostSchema } from "@/v1/post/schemas/post.schema";
 import { PostProviders } from "./providers/post.providers";
 import { ProvidersModule } from "@/providers/providers.module";
@@ -12,14 +12,14 @@ import { validate } from "class-validator";
 import { CreatePostDto } from "@/v1/post/dto/create-post.dto";
 import { PostController } from "@/v1/post/post.controller";
 import * as fs from "fs";
-import * as mongoose from 'mongoose';
+import * as mongoose from "mongoose";
 import * as streamBuffers from "stream-buffers";
 
-const POST_MODEL:mongoose.Model<any> =  mongoose.model('post', PostSchema);
+const POST_MODEL: mongoose.Model<any> = mongoose.model("post", PostSchema);
 
 const mockingPostModel = () => {
-  create: jest.fn()
-}
+  create: jest.fn();
+};
 
 async function FileUpload() {
   const fileToBuffer = (filename) => {
@@ -46,13 +46,11 @@ async function FileUpload() {
       });
     });
   };
-  const imageBuffer = (await fileToBuffer(
-    "./uploads-tmp/test.png"
-  )) as Buffer;
+  const imageBuffer = (await fileToBuffer("./uploads-tmp/test.png")) as Buffer;
 
   const myReadableStreamBuffer = new streamBuffers.ReadableStreamBuffer({
     frequency: 10, // in milliseconds.
-    chunkSize: 2048 // in bytes.
+    chunkSize: 2048, // in bytes.
   });
   myReadableStreamBuffer.put(imageBuffer as Buffer);
   return {
@@ -65,11 +63,11 @@ async function FileUpload() {
     filename: "file-name",
     path: "file-path",
     size: 955578,
-    stream: myReadableStreamBuffer
+    stream: myReadableStreamBuffer,
   };
 }
 
-describe('Post Controller', () => {
+describe("Post Controller", () => {
   let service: PostService;
   let repository: PostRepository;
   let postController: PostController;
@@ -82,36 +80,40 @@ describe('Post Controller', () => {
           load: [appConfig],
         }),
         ProvidersModule,
-        CoreModule
+        CoreModule,
       ],
       controllers: [PostController],
-      providers: [...PostProviders, PostService, PostRepository,
-        {provide: POST_MODEL, useFactory: mockingPostModel}],
+      providers: [
+        ...PostProviders,
+        PostService,
+        PostRepository,
+        { provide: POST_MODEL, useFactory: mockingPostModel },
+      ],
     }).compile();
     service = module.get<PostService>(PostService);
     repository = module.get<PostRepository>(PostRepository);
     postController = module.get<PostController>(PostController);
   });
 
-  it('post controller should be defined', () => {
+  it("post controller should be defined", () => {
     expect(postController).toBeDefined();
   });
 
-  describe('test post dto', () => {
-    it('should throw when title is empty.', async () => {
-      const dtoData = { title: '', author: 'arslan'}
-      const ofDtoData = plainToInstance(CreatePostDto, dtoData)
-      const errors = await validate(ofDtoData, { skipMissingProperties: true })
-      expect(errors.length).not.toBe(0)
-      expect(JSON.stringify(errors)).toContain(`title should not be empty`)
+  describe("test post dto", () => {
+    it("should throw when title is empty.", async () => {
+      const dtoData = { title: "", author: "arslan" };
+      const ofDtoData = plainToInstance(CreatePostDto, dtoData);
+      const errors = await validate(ofDtoData, { skipMissingProperties: true });
+      expect(errors.length).not.toBe(0);
+      expect(JSON.stringify(errors)).toContain(`title should not be empty`);
     });
 
-    it('should pass the dto validation.', async () => {
-      const dtoData = { title: 'arslan', author: 'arslan'}
-      const ofDtoData = plainToInstance(CreatePostDto, dtoData)
-      const errors = await validate(ofDtoData, { skipMissingProperties: true })
-      expect(errors.length).toBe(0)
-      expect(JSON.stringify(errors)).toEqual('[]')
+    it("should pass the dto validation.", async () => {
+      const dtoData = { title: "arslan", author: "arslan" };
+      const ofDtoData = plainToInstance(CreatePostDto, dtoData);
+      const errors = await validate(ofDtoData, { skipMissingProperties: true });
+      expect(errors.length).toBe(0);
+      expect(JSON.stringify(errors)).toEqual("[]");
     });
   });
 
@@ -122,23 +124,21 @@ describe('Post Controller', () => {
         author: "arslan",
         title: "title",
         content: "content",
-        image: "uploads-tmp/8f0957c9-fac9-4249-8948-7d86ba73652b - Screenshot from 2022-04-20 22-07-47.png",
+        image:
+          "uploads-tmp/8f0957c9-fac9-4249-8948-7d86ba73652b - Screenshot from 2022-04-20 22-07-47.png",
         category: "627f6e99ab31f92c6579ac20",
-        "likes": [],
-        tags: [
-          "tag1",
-          "tag2"
-        ] ,
-        likesCount: 6
-      } as Post
-      jest.spyOn(service, "create").mockImplementation(async (): Promise<Post> => {
-        return expectedResult;
-      });
+        likes: [],
+        tags: ["tag1", "tag2"],
+        likesCount: 6,
+      } as Post;
+      jest
+        .spyOn(service, "create")
+        .mockImplementation(async (): Promise<Post> => {
+          return expectedResult;
+        });
       let imageFile = await FileUpload();
 
       expect(await postController.create(dto, imageFile)).toBe(expectedResult);
     });
-
   });
-
 });

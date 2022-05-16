@@ -1,5 +1,5 @@
-import { ApiProperty} from '@nestjs/swagger';
-import {IsNotEmpty} from "class-validator";
+import { ApiProperty } from "@nestjs/swagger";
+import { IsNotEmpty } from "class-validator";
 
 export class LoginDto {
   @ApiProperty()
@@ -50,5 +50,4 @@ export class LoginDto {
 
   @ApiProperty()
   longitude: string;
-
 }

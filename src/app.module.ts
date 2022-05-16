@@ -1,6 +1,6 @@
-import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { Module } from "@nestjs/common";
+import { AppController } from "./app.controller";
+import { AppService } from "./app.service";
 import appConfig from "./config/app.config";
 import { ConfigModule } from "@nestjs/config";
 import { ProvidersModule } from "./providers/providers.module";
@@ -13,12 +13,12 @@ import { HealthModule } from "@/shared/health/health.module";
     ConfigModule.forRoot({
       isGlobal: true,
       load: [appConfig],
-      envFilePath: ['.env'],
+      envFilePath: [".env"],
     }),
     ProvidersModule,
     CoreModule,
     V1Module,
-    HealthModule
+    HealthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

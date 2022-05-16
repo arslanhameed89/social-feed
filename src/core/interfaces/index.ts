@@ -1,1 +1,1 @@
-export * from './IFile';
+export * from "./IFile";

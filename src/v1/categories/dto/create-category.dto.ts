@@ -1,7 +1,6 @@
-import { IsNotEmpty } from 'class-validator';
-import { ApiProperty } from '@nestjs/swagger';
+import { IsNotEmpty } from "class-validator";
+import { ApiProperty } from "@nestjs/swagger";
 export class createCategoryDto {
-
   @IsNotEmpty()
   @ApiProperty()
   name: string;
@@ -11,10 +10,10 @@ export class createCategoryDto {
   description: string;
 
   @IsNotEmpty()
-  @ApiProperty({default: true})
+  @ApiProperty({ default: true })
   status?: number = 1;
 
   @IsNotEmpty()
-  @ApiProperty({default: 'Active'})
-  statusMsg?: string = 'Active';
+  @ApiProperty({ default: "Active" })
+  statusMsg?: string = "Active";
 }

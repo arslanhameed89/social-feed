@@ -1,5 +1,5 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
+import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
+import { Document } from "mongoose";
 import { ApiProperty } from "@nestjs/swagger";
 
 export class coordinates {
@@ -11,7 +11,6 @@ export class coordinates {
 
 @Schema({ autoCreate: true, timestamps: true })
 export class User extends Document {
-
   @Prop()
   name: string;
 
@@ -50,7 +49,6 @@ export class User extends Document {
 
   @Prop()
   statusMsg: string;
-
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

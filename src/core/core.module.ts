@@ -1,5 +1,5 @@
-import { Module, Global } from '@nestjs/common';
-import { BaseRepository } from './repository';
+import { Module, Global } from "@nestjs/common";
+import { BaseRepository } from "./repository";
 
 @Global()
 @Module({

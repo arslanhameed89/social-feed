@@ -1,6 +1,6 @@
-import mongoose from 'mongoose';
-import { IRepository } from './IRepository';
-import { Types } from 'mongoose';
+import mongoose from "mongoose";
+import { IRepository } from "./IRepository";
+import { Types } from "mongoose";
 
 export class BaseRepository<T> implements IRepository<T> {
   private readonly _model: mongoose.Model<mongoose.Document>;
@@ -46,7 +46,7 @@ export class BaseRepository<T> implements IRepository<T> {
           },
           {
             new: true,
-          },
+          }
         )
         .exec();
     } catch (err) {
@@ -57,7 +57,7 @@ export class BaseRepository<T> implements IRepository<T> {
   async updateByQuery(
     condition: Record<string, any>,
     item: Record<string, any>,
-    options = { new: true },
+    options = { new: true }
   ): Promise<any> {
     try {
       return await this._model
@@ -66,7 +66,7 @@ export class BaseRepository<T> implements IRepository<T> {
           {
             $set: item,
           },
-          options,
+          options
         )
         .exec();
     } catch (err) {
@@ -78,7 +78,7 @@ export class BaseRepository<T> implements IRepository<T> {
     condition: Record<string, any>,
     item: Record<string, any>,
     pushItem: Record<string, any>,
-    options = { new: true },
+    options = { new: true }
   ): Promise<any> {
     try {
       return await this._model
@@ -88,7 +88,7 @@ export class BaseRepository<T> implements IRepository<T> {
             $set: item,
             $push: pushItem,
           },
-          options,
+          options
         )
         .lean()
         .exec();
@@ -106,7 +106,7 @@ export class BaseRepository<T> implements IRepository<T> {
   async pushByQuery(
     condition: Record<string, any>,
     pushItem: Record<string, any>,
-    options = { new: true },
+    options = { new: true }
   ): Promise<any> {
     try {
       return await this._model
@@ -115,7 +115,7 @@ export class BaseRepository<T> implements IRepository<T> {
           {
             $push: pushItem,
           },
-          options,
+          options
         )
         .exec();
     } catch (err) {
@@ -160,7 +160,7 @@ export class BaseRepository<T> implements IRepository<T> {
   async findWIthSkipAndLimit(
     query = {},
     skip: number,
-    limit: number,
+    limit: number
   ): Promise<any> {
     try {
       return await this._model
@@ -183,7 +183,7 @@ export class BaseRepository<T> implements IRepository<T> {
   }
   async findOneByQuery(
     query: Record<string, any>,
-    filterFields?: Record<string, any>,
+    filterFields?: Record<string, any>
   ): Promise<any> {
     try {
       return await this._model.findOne(query, filterFields).lean().exec();
@@ -194,7 +194,7 @@ export class BaseRepository<T> implements IRepository<T> {
 
   async findAllByQuery(
     query: Record<string, any>,
-    filterFields?: Record<string, any>,
+    filterFields?: Record<string, any>
   ): Promise<any> {
     try {
       return await this._model.find(query, filterFields).lean().exec();
@@ -271,7 +271,7 @@ export class BaseRepository<T> implements IRepository<T> {
           {
             $pull: pullQuery,
           },
-          { new: true },
+          { new: true }
         )
         .lean()
         .exec();
@@ -283,13 +283,10 @@ export class BaseRepository<T> implements IRepository<T> {
   async findByQueryAndSortByCondition(
     query: Record<string, any>,
     sortQuery = {},
-    filterFields = {},
+    filterFields = {}
   ): Promise<any> {
     try {
-      return await this._model
-        .find(query, filterFields)
-        .sort(sortQuery)
-        .lean();
+      return await this._model.find(query, filterFields).sort(sortQuery).lean();
     } catch (err) {
       throw err;
     }
@@ -298,7 +295,7 @@ export class BaseRepository<T> implements IRepository<T> {
   async findOneAndSortByCondition(
     query: Record<string, any>,
     sortQuery = {},
-    filterFields = {},
+    filterFields = {}
   ): Promise<any> {
     try {
       return await this._model

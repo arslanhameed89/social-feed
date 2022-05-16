@@ -1,9 +1,8 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
+import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
+import { Document } from "mongoose";
 
 @Schema({ autoCreate: true, timestamps: true })
 export class Post extends Document {
-
   @Prop()
   author: string;
 
@@ -36,7 +35,6 @@ export class Post extends Document {
 
   @Prop()
   statusMsg: string;
-
 }
 
 export const PostSchema = SchemaFactory.createForClass(Post);

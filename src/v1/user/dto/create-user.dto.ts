@@ -1,10 +1,9 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty } from "@nestjs/swagger";
 import { IsEmail, IsNotEmpty, IsNumber, IsString } from "class-validator";
-import { coordinates } from '@/v1/user/schemas/user.schema';
+import { coordinates } from "@/v1/user/schemas/user.schema";
 import { Transform, Type } from "class-transformer";
 
 export class CreateUserDto {
-
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
@@ -40,12 +39,11 @@ export class CreateUserDto {
   @ApiProperty()
   profilePic: string;
 
-  @ApiProperty({default: true})
+  @ApiProperty({ default: true })
   @IsNotEmpty()
   status?: number = 1;
 
   @IsNotEmpty()
-  @ApiProperty({default: true})
-  statusMsg?: string = 'Active';
-
+  @ApiProperty({ default: true })
+  statusMsg?: string = "Active";
 }

@@ -1,16 +1,13 @@
-import { Injectable } from '@nestjs/common';
-import * as bcrypt from 'bcrypt';
-import { ConfigService } from '@nestjs/config';
-
+import { Injectable } from "@nestjs/common";
+import * as bcrypt from "bcrypt";
+import { ConfigService } from "@nestjs/config";
 
 @Injectable()
 export class HashService {
   saltRounds: number;
 
-  constructor(
-    private configService: ConfigService,
-  ) {
-    this.saltRounds = this.configService.get<number>('APP.SALT_ROUND');
+  constructor(private configService: ConfigService) {
+    this.saltRounds = this.configService.get<number>("APP.SALT_ROUND");
   }
 
   async hashPassword(password: string): Promise<string> {
@@ -24,7 +21,7 @@ export class HashService {
 
   async comparePassword(
     password: string,
-    dbPassword: string,
+    dbPassword: string
   ): Promise<boolean> {
     try {
       return await bcrypt.compare(password, dbPassword);

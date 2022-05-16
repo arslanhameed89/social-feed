@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable } from "@nestjs/common";
 import {
   HealthCheckError,
   HealthIndicator,
@@ -9,10 +9,7 @@ import { ConfigService } from "@nestjs/config";
 
 @Injectable()
 export class HealthService extends HealthIndicator {
-
-  constructor(
-    private readonly configService: ConfigService
-  ) {
+  constructor(private readonly configService: ConfigService) {
     super();
   }
 
@@ -20,7 +17,7 @@ export class HealthService extends HealthIndicator {
     let isHealthy: boolean;
     let connection: mongoose.Mongoose;
     try {
-      const url = this.configService.get<string>('APP.DB.MONGODB_URL')
+      const url = this.configService.get<string>("APP.DB.MONGODB_URL");
       connection = await mongoose.connect(url);
 
       isHealthy = true;

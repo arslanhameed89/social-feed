@@ -1,17 +1,17 @@
 export const UploadRequestBody = {
   name: {
-    type: 'string'
+    type: "string",
   },
   password: {
-    type: 'string'
+    type: "string",
   },
   email: {
-    type: 'string'
+    type: "string",
   },
   mobile: {
-    type: 'number'
+    type: "number",
   },
   dateOfBirth: {
-    type: 'string'
-  }
-}
+    type: "string",
+  },
+};

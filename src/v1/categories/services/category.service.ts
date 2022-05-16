@@ -6,28 +6,24 @@ import { updateCategoryDto } from "@/v1/categories/dto/update-category.dto";
 
 @Injectable()
 export class CategoryService {
-  constructor(
-    private readonly categoryRepository: CategoryRepository,
-  ) {}
-
+  constructor(private readonly categoryRepository: CategoryRepository) {}
 
   async create(dto: createCategoryDto): Promise<Category> {
     try {
       const query = {
-        'name': new RegExp(['^', dto.name, '$'].join(''), 'i'),
+        name: new RegExp(["^", dto.name, "$"].join(""), "i"),
       };
 
       const data = await this.categoryRepository.findOneByQuery(query);
 
       if (data && data.length > 0) {
         throw new HttpException(
-          'category already exist!',
-          HttpStatus.BAD_REQUEST,
+          "category already exist!",
+          HttpStatus.BAD_REQUEST
         );
       }
 
       return await this.categoryRepository.create(dto);
-
     } catch (e) {
       console.info(e);
 
@@ -35,19 +31,17 @@ export class CategoryService {
     }
   }
 
-
   async update(id: string, dto: updateCategoryDto): Promise<Category> {
     try {
-
       const data = await this.categoryRepository.findOne(id);
 
       if (!data) {
-        throw new HttpException('Record not found', HttpStatus.BAD_REQUEST);
+        throw new HttpException("Record not found", HttpStatus.BAD_REQUEST);
       }
 
       return await this.categoryRepository.update(id, dto);
     } catch (e) {
-       throw e;
+      throw e;
     }
   }
 
@@ -58,11 +52,11 @@ export class CategoryService {
     const data = await this.categoryRepository.findOne(id);
 
     if (!data) {
-      throw new HttpException('Record not found', HttpStatus.BAD_REQUEST);
+      throw new HttpException("Record not found", HttpStatus.BAD_REQUEST);
     }
     return this.categoryRepository.update(id, {
       status: 0,
-      statusMsg: 'IN_ACTIVE',
+      statusMsg: "IN_ACTIVE",
     });
   }
 
@@ -86,5 +80,4 @@ export class CategoryService {
       throw e;
     }
   }
-
 }
