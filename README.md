@@ -80,7 +80,7 @@ $ npm run build
 
 #### Start
 ```bash
-pm2 start npm --name "cron-cruise" -- run start:prod
+pm2 start npm --name "social-feed" -- run start:prod
 ```
 
 ## Test
