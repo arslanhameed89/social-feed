@@ -7,7 +7,14 @@
 ## Pre-requisites
 - NodeJS (`>=14.1.2`)
 - MONGODB (`>= 4.0`)
+--- 
+- In case you dont have locally setup mongo
+- cd social-feed/scripts
+- ./dokcerized-mongodb-container.sh
+
+- -- Note: Make you sure you have locally installed docker and proper have proper permissions
 ---
+
 ## Prepare ENV
 * Copy `.env.example` to `.env`
 
