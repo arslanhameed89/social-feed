@@ -15,7 +15,6 @@ export class PostService {
     file: IUploadedFileFile
   ): Promise<Post> {
     try {
-      console.info(file.mimetype, "file.mimetypfile.mimetypfile.mimetyp");
       if (!file.mimetype.includes("image")) {
         new UnsupportedMediaTypeException(`Image file Type is allowed`);
       }
