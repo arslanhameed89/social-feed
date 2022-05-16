@@ -1,7 +1,6 @@
 import { Injectable } from "@nestjs/common";
-import * as bcrypt from "bcrypt";
 import { ConfigService } from "@nestjs/config";
-import { hashSync } from "bcrypt";
+import { hashSync, compareSync } from "bcrypt";
 
 @Injectable()
 export class HashService {
@@ -13,7 +12,7 @@ export class HashService {
 
   async hashPassword(password: string): Promise<string> {
     try {
-      return bcrypt.hashSync(password, this.saltRounds);
+      return hashSync(password, this.saltRounds);
     } catch (err) {
       console.info(err);
       throw err;
@@ -25,7 +24,7 @@ export class HashService {
     dbPassword: string
   ): Promise<boolean> {
     try {
-      return bcrypt.compareSync(password, dbPassword);
+      return compareSync(password, dbPassword);
     } catch (err) {
       console.info(err);
       throw err;
